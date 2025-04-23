@@ -11,7 +11,7 @@ function task(message, delay) {
     .then(() => task("Task 2", 1000))
     .then(() => task("Task 3", 1000))
     .then(() => console.log("All tasks done (Promise Chaining)"));
-    function task(message, delay) {
+  function task(message, delay) {
         return new Promise((resolve) => {
           setTimeout(() => {
             console.log(message);
@@ -20,7 +20,7 @@ function task(message, delay) {
         });
       }
       
-      async function runTasks() {
+  async function runTasks() {
         await task("Task 1", 1000);
         await task("Task 2", 1000);
         await task("Task 3", 1000);

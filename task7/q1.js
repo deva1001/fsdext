@@ -15,6 +15,12 @@ let users = [
 //  fs.writeFileSync('./users.json', JSON.stringify(users, null, 2));
 //}
 // GET all users
+/*function getUsers() {
+  const data = fs.readFileSync('./users.json', 'utf-8');
+  return JSON.parse(data);
+}
+
+*/
 app.get('/users', (req, res) => {
   res.json(users);
 });
