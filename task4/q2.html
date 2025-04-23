@@ -1,0 +1,53 @@
+<input type="text" id="city" placeholder="Enter city">
+<button onclick="getWeather()">Get Weather</button>
+
+<table border="1" id="weatherTable" style="margin-top: 20px;">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Temperature (°C)</th>
+      <th>Min Temp (°C)</th>
+      <th>Max Temp (°C)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Data will be inserted here -->
+  </tbody>
+</table>
+
+<script>
+    async function getWeather() {
+      const city = document.getElementById('city').value;
+      const tableBody = document.getElementById('weatherTable').getElementsByTagName('tbody')[0];
+      tableBody.innerHTML = ''; // Clear previous data
+    
+      try {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=6a86468ac81fa36a5565acaaa9f651b5`
+        );
+    
+        if (!response.ok) {
+          alert("City not found or API error");
+          return;
+        }
+    
+        const data = await response.json();
+        const { list } = data;
+    
+        for (let i = 0; i < list.length; i += 8) {
+          const { dt_txt, main: { temp, temp_min, temp_max } } = list[i];
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${dt_txt}</td>
+            <td>${Math.round(temp - 273.15)}</td>
+            <td>${Math.round(temp_min - 273.15)}</td>
+            <td>${Math.round(temp_max - 273.15)}</td>
+          `;
+          tableBody.appendChild(row);
+        }
+      } catch (err) {
+        console.error("Fetch error:", err);
+      }
+    }
+    </script>
+    

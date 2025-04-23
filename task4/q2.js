@@ -19,3 +19,4 @@ for(let i=0;i<list.length;i=i+8){
 
 }
 }
+getWeather()

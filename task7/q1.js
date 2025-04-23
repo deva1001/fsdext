@@ -11,6 +11,9 @@ let users = [
   { id: 2, name: 'Bob', age: 25, email: 'bob@example.com' }
 ];
 
+//function saveUsers(users) {
+//  fs.writeFileSync('./users.json', JSON.stringify(users, null, 2));
+//}
 // GET all users
 app.get('/users', (req, res) => {
   res.json(users);
