@@ -1,13 +1,14 @@
-// Create a symbol
-const uniqueSymbol = Symbol('unique');
+function createCounter() {
+  let count = 0; // This variable is enclosed
 
-// Using a symbol as a key for an object
-const obj = {
-  [uniqueSymbol]: 'This is a unique value'
-};
+  return function () {
+    count++;
+    console.log("Current count:", count);
+  };
+}
 
-console.log(obj[uniqueSymbol]);  // Output: This is a unique value
+const counter = createCounter();
 
-// Symbols are guaranteed to be unique
-const anotherSymbol = Symbol('unique');
-console.log(uniqueSymbol === anotherSymbol);  // Output: false
+counter(); // Output: Current count: 1
+counter(); // Output: Current count: 2
+counter(); // Output: Current count: 3
